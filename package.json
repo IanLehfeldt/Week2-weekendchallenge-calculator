@@ -1,0 +1,23 @@
+{
+  "name": "week2-weekendchallenge-calculator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.15.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IanLehfeldt/Week2-weekendchallenge-calculator.git"
+  },
+  "author": "ian lehfeldt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IanLehfeldt/Week2-weekendchallenge-calculator/issues"
+  },
+  "homepage": "https://github.com/IanLehfeldt/Week2-weekendchallenge-calculator#readme"
+}
