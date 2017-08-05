@@ -14,6 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post('/calculate', function (req, res){
     console.log(req.body);
+    mathinator(req.body);
     calculateArray.push(req.body);
     res.sendStatus(201);
 })
@@ -27,3 +28,22 @@ app.get('/calculationsArray', function (req, res){
 app.listen(port, function(){
     console.log('Currently connected to port', port);
 })
+
+function mathinator (object){
+    if (object.method == 'add'){
+        console.log('Mathinator is adding..');
+        
+    }
+    else if (object.method == 'subtract'){
+        console.log('Mathinator is subtracting..');
+        
+    }
+    else if (object.method == 'multiply'){
+        console.log('Mathinator is multiplying..');
+   
+    }
+    else if (object.method == 'divide'){
+        console.log('Mathinator is dividing..');
+    
+    }
+}
