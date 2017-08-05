@@ -1,30 +1,34 @@
 $(document).ready(function () {
     console.log('Jquery is being sourced!!');
-    updateCalculator();
+    //updateCalculator();
    
 
     $('#addButton').on('click', function () {
         console.log('Add button was click!');
         calculatorInput();
-        var mathButton = add;
+        var mathButton = 'add';
+        serverCalculations();
     })
 
     $('#subtractButton').on('click', function () {
         console.log('Subtract button was click!');
         calculatorInput();
-        var mathButton = subtract;
+        var mathButton = 'subtract';
+        serverCalculations();
     })
 
     $('#multiplyButton').on('click', function () {
         console.log('Multiply button was click!');
         calculatorInput();
-        var mathButton = multiply;
+        var mathButton = 'multiply';
+        serverCalculations();
     })
 
     $('#divideButton').on('click', function () {
         console.log('Divide button was click!');
         calculatorInput();
-        var mathButton = divide;
+        var mathButton = 'divide';
+        serverCalculations();
     })
 });
 
@@ -44,20 +48,20 @@ function updateCalculator() {
     })
 }
 
-function sendToServer () {
-    $.ajax({
-        method: 'POST',
-        url: '/calculate',
-        data: {
-            X: inputX,
-            Y: inputY,
-            method: mathButton
-        },
-        success: function (response){
-            console.log(response);
-        }
-    })
-}
+// function sendToServer () {
+//     $.ajax({
+//         method: 'POST',
+//         url: '/calculate',
+//         data: {
+//             X: inputX,
+//             Y: inputY,
+//             method: mathButton
+//         },
+//         success: function (response){
+//             console.log(response);
+//         }
+//     })
+// }
 
 // function postCalculations(calculationArray){
 //     $('#calculationDiv').empty();
@@ -67,3 +71,15 @@ function sendToServer () {
 //         )
 //     }
 // }
+
+function serverCalculations () {
+    $.ajax({
+        method: 'GET',
+        url: '/calculationsArray',
+        success: function (response){
+            console.log(response);
+            //postCalculations(response);           
+        }
+    })
+
+}
