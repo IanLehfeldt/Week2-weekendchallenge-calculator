@@ -1,7 +1,6 @@
 $(document).ready(function () {
     console.log('Jquery is being sourced!!');
-    //updateCalculator();
-   
+    serverCheck();
 
     $('#addButton').on('click', function () {
         console.log('Add button was click!');
@@ -32,7 +31,7 @@ $(document).ready(function () {
     })
 });
 
-function calculatorInput(){
+function calculatorInput() {
     inputX = $('#variableX').val();
     inputY = $('#variableY').val();
 }
@@ -41,15 +40,15 @@ function updateCalculator() {
     $.ajax({
         method: 'GET',
         url: '/calculatorArray',
-        success: function(response) {
+        success: function (response) {
             console.log(response);
         }
     })
 }
 
-function sendToServer () {
+function sendToServer() {
     console.log(inputX, inputY, mathButton);
-    
+
     $.ajax({
         method: 'POST',
         url: '/calculate',
@@ -58,29 +57,31 @@ function sendToServer () {
             Y: inputY,
             method: mathButton
         },
-        success: function (response){
+        success: function (response) {
             console.log(response);
+            serverCheck();
         }
     })
 }
 
-// function postCalculations(calculationArray){
-//     $('#calculationDiv').empty();
-//     for (var i = 0; i<calculationArray.length; i++){
-//         $('#calculationDiv').append(
-//             '<p>' + calculationArray[i]. + '</p>'
-//         )
-//     }
-// }
+function postCalculations(calculationArray) {
+    $('#calculationDiv').empty();
+    for (var i = 0; i < calculationArray.length; i++) {
+        $('#calculationDiv').append(
+            '<p>' + calculationArray[i].X + " " + calculationArray[i].Y + " "
+            + calculationArray[i].method + '</p>'
+        );
+    }
+}
 
-// function serverCheck () {
-//     $.ajax({
-//         method: 'GET',
-//         url: '/calculationsArray',
-//         success: function (response){
-//             console.log(response);
-//             //postCalculations(response);           
-//         }
-//     })
+function serverCheck() {
+    $.ajax({
+        method: 'GET',
+        url: '/calculationsArray',
+        success: function (response) {
+            console.log(response);
+            postCalculations(response);
+        }
+    })
 
-// }
+}
