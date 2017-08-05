@@ -6,36 +6,35 @@ $(document).ready(function () {
     $('#addButton').on('click', function () {
         console.log('Add button was click!');
         calculatorInput();
-        var mathButton = 'add';
-        serverCalculations();
+        mathButton = 'add';
+        sendToServer();
     })
 
     $('#subtractButton').on('click', function () {
         console.log('Subtract button was click!');
         calculatorInput();
-        var mathButton = 'subtract';
-        serverCalculations();
+        mathButton = 'subtract';
+        sendToServer();
     })
 
     $('#multiplyButton').on('click', function () {
         console.log('Multiply button was click!');
         calculatorInput();
-        var mathButton = 'multiply';
-        serverCalculations();
+        mathButton = 'multiply';
+        sendToServer();
     })
 
     $('#divideButton').on('click', function () {
         console.log('Divide button was click!');
         calculatorInput();
-        var mathButton = 'divide';
-        serverCalculations();
+        mathButton = 'divide';
+        sendToServer();
     })
 });
 
 function calculatorInput(){
-    var inputX = $('#variableX').val();
-    var inputY = $('#variableY').val();
-    console.log(inputX,inputY);
+    inputX = $('#variableX').val();
+    inputY = $('#variableY').val();
 }
 
 function updateCalculator() {
@@ -48,20 +47,22 @@ function updateCalculator() {
     })
 }
 
-// function sendToServer () {
-//     $.ajax({
-//         method: 'POST',
-//         url: '/calculate',
-//         data: {
-//             X: inputX,
-//             Y: inputY,
-//             method: mathButton
-//         },
-//         success: function (response){
-//             console.log(response);
-//         }
-//     })
-// }
+function sendToServer () {
+    console.log(inputX, inputY, mathButton);
+    
+    $.ajax({
+        method: 'POST',
+        url: '/calculate',
+        data: {
+            X: inputX,
+            Y: inputY,
+            method: mathButton
+        },
+        success: function (response){
+            console.log(response);
+        }
+    })
+}
 
 // function postCalculations(calculationArray){
 //     $('#calculationDiv').empty();
@@ -72,14 +73,14 @@ function updateCalculator() {
 //     }
 // }
 
-function serverCalculations () {
-    $.ajax({
-        method: 'GET',
-        url: '/calculationsArray',
-        success: function (response){
-            console.log(response);
-            //postCalculations(response);           
-        }
-    })
+// function serverCheck () {
+//     $.ajax({
+//         method: 'GET',
+//         url: '/calculationsArray',
+//         success: function (response){
+//             console.log(response);
+//             //postCalculations(response);           
+//         }
+//     })
 
-}
+// }
