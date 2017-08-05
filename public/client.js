@@ -3,31 +3,42 @@ $(document).ready(function () {
     serverCheck();
 
     $('#addButton').on('click', function () {
-        console.log('Add button was click!');
+        console.log('Add button was clicked!');
         calculatorInput();
-        mathButton = 'add';
+        mathButton = '+';
         sendToServer();
     })
 
     $('#subtractButton').on('click', function () {
-        console.log('Subtract button was click!');
+        console.log('Subtract button was clicked!');
         calculatorInput();
-        mathButton = 'subtract';
+        mathButton = '-';
         sendToServer();
     })
 
     $('#multiplyButton').on('click', function () {
-        console.log('Multiply button was click!');
+        console.log('Multiply button was clicked!');
         calculatorInput();
-        mathButton = 'multiply';
+        mathButton = '*';
         sendToServer();
     })
 
     $('#divideButton').on('click', function () {
-        console.log('Divide button was click!');
+        console.log('Divide button was clicked!');
         calculatorInput();
-        mathButton = 'divide';
+        mathButton = '/';
         sendToServer();
+    })
+
+    $('#clearButton').on('click', function () {
+        console.log('Clear button was clicked!');
+        $.ajax({
+            method: 'GET',
+            url: '/clearCalculatorArray',
+            success: function (response){
+                serverCheck();
+            }
+        })
     })
 });
 
@@ -36,15 +47,15 @@ function calculatorInput() {
     inputY = $('#variableY').val();
 }
 
-function updateCalculator() {
-    $.ajax({
-        method: 'GET',
-        url: '/calculatorArray',
-        success: function (response) {
-            console.log(response);
-        }
-    })
-}
+// function updateCalculator() {
+//     $.ajax({
+//         method: 'GET',
+//         url: '/calculatorArray',
+//         success: function (response) {
+//             console.log(response);
+//         }
+//     })
+// }
 
 function sendToServer() {
     console.log(inputX, inputY, mathButton);
@@ -68,8 +79,9 @@ function postCalculations(calculationArray) {
     $('#calculationDiv').empty();
     for (var i = 0; i < calculationArray.length; i++) {
         $('#calculationDiv').append(
-            '<p>' + calculationArray[i].X + " " + calculationArray[i].Y + " "
-            + calculationArray[i].method + '</p>'
+            '<p>' + calculationArray[i].X + " " + calculationArray[i].method 
+            + " " + calculationArray[i].Y + " " 
+            + " =  <br>" + calculationArray[i].calculation + '</p>'
         );
     }
 }

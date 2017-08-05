@@ -12,9 +12,10 @@ var calculateArray = [];
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
+//Client posts new information to array
 app.post('/calculate', function (req, res){
-    console.log(req.body);
     mathinator(req.body);
+    console.log(req.body);
     calculateArray.push(req.body);
     res.sendStatus(201);
 })
@@ -25,25 +26,32 @@ app.get('/calculationsArray', function (req, res){
     res.send(calculateArray);
 })
 
+app.get('/clearCalculatorArray', function (req, res){
+    console.log('Clearing calculator array ...');
+    calculateArray = [];
+    res.send(calculateArray);
+})
+
 app.listen(port, function(){
     console.log('Currently connected to port', port);
 })
 
 function mathinator (object){
-    if (object.method == 'add'){
+    if (object.method == '+'){
         console.log('Mathinator is adding..');
-        
+        object.calculation = parseInt(object.X) + parseInt(object.Y);
     }
-    else if (object.method == 'subtract'){
+    else if (object.method == '-'){
         console.log('Mathinator is subtracting..');
-        
+        object.calculation = object.X - object.Y;
+
     }
-    else if (object.method == 'multiply'){
+    else if (object.method == '*'){
         console.log('Mathinator is multiplying..');
-   
+        object.calculation = object.X * object.Y;
     }
-    else if (object.method == 'divide'){
+    else if (object.method == '/'){
         console.log('Mathinator is dividing..');
-    
+        object.calculation = object.X / object.Y;
     }
 }

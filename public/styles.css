@@ -1,0 +1,13 @@
+h1{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 3em;
+}
+
+#calculationDiv{
+    font-size: 2em;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+    background-color: lightyellow;
+}
